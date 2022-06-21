@@ -2,23 +2,40 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const cors = require('cors');
-
+const Blog = require('./routes/blogRoutes');
+const db = require('./config/mongoose');
+const errorHandler = require('./errors/errorHandler')
 
 // middlewares
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
+app.use(errorHandler);
+
 
 //Home page
 app.get("/", (req, res) => {
     res.send("Welcome to PJMiles API");
   });
   
-// routes & API
-const Blog = require('./routes/blogRoutes');
+
+
 
 // create blog
 app.post('/blogpost', Blog)
+
+// get post by id
+app.get('/blogpost/:id', Blog)
+
+app.get('/blogposts', Blog)
+
+// get and patch
+app.patch('/blogpost/:id', Blog)
+
+// delete
+app.delete('/blogpost/:id', Blog)
+// get by page
+
 
 
 
@@ -32,7 +49,6 @@ app.post('/blogpost', Blog)
 
 // database 
 const database = () => {
-    const db = require('./config/mongoose')
     return db
 }
 
