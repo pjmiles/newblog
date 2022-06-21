@@ -11,10 +11,14 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 
-
+const database = () => {
+    const db = require('./config/mongoose')
+    return db
+}
 
 const start = async () => {
     try {
+        await database()
         app.listen(process.env.PORT, () =>{
             console.log(`server started listening on port: ${process.env.PORT}`)
         })
