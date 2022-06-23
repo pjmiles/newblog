@@ -5,11 +5,11 @@ const { getBlogPostById, getAndPatchById, getBlogPostByPage } = require('../cont
 const { getBlogAndDelete } = require('../controller/deleteBlog')
 
 
-router.post('/blogpost', createBlogPost)
-router.get('/blogpost/:id', getBlogPostById)
-router.get('/blogposts', getBlogPostByPage)
-router.patch('/blogpost/:id', getAndPatchById)
-router.delete('/blogpost/:id', getBlogAndDelete)
+router.post('/', createBlogPost)
+router.get('/:id', getBlogPostById)
+router.get('/', getBlogPostByPage)
+router.patch('/:id', getAndPatchById)
+router.delete('/:id', getBlogAndDelete)
 
 
 
